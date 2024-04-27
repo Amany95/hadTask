@@ -15,11 +15,35 @@ import {FlashList} from '@shopify/flash-list';
 import {IMoviesListResponse} from '../../../../stores/movies/interfaces/Interfaces';
 
 export const RemainingMovies: React.FC<{}> = () => {
+  const [list, setList] = useState<IMoviesListResponse>({
+    page: 0,
+    total_pages: 0,
+    total_results: 0,
+    results: {
+      adult: false,
+      backdrop_path: '',
+      genre_ids: [],
+      id: 0,
+      original_language: '',
+      original_title: '',
+      overview: '',
+      popularity: 0,
+      poster_path: '',
+      release_date: '',
+      title: '',
+      video: false,
+      vote_average: 0,
+      vote_count: 0,
+    },
+  });
   // *************************** selector **************************
   const {data, loading} = useSelector(
     state => state?.MoviesReducer?.moviesList,
   );
-
+  // *************************** useEffect **************************
+  useEffect(() => {
+    setList(data.results?.slice(1));
+  }, [data]);
   // *************************** render **********************************
   const renderItem = ({item, index}: {item: any; index: number}) => {
     return (
@@ -31,7 +55,6 @@ export const RemainingMovies: React.FC<{}> = () => {
           resizeMode={FastImage.resizeMode.stretch}
         />
         {/* </View> */}
-
       </View>
     );
   };
@@ -39,11 +62,11 @@ export const RemainingMovies: React.FC<{}> = () => {
     <View style={Styles.container}>
       <Text style={Styles.titleTextStyle}>Estrenos</Text>
 
-      {data?.results?.length > 0 && (
+      {list?.length > 0 && (
         <FlashList
           showsHorizontalScrollIndicator={false}
           horizontal
-          data={data.results}
+          data={list}
           renderItem={renderItem}
           estimatedItemSize={3}
           estimatedListSize={{
