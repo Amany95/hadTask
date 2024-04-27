@@ -9,6 +9,7 @@ import {IActionReducer, IMoviesListState} from '../interfaces/Interfaces';
 const initialState = {
   data: [],
   loading: false,
+  
 };
 const MoviesListReducer = (
   state: IMoviesListState = initialState,

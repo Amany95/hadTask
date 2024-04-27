@@ -70,7 +70,7 @@ const BottomTabs = () => {
 const styles = StyleSheet.create({
   tabBarStyle: {
     backgroundColor: Colors.PrimaryColor,
-    height: '9%',
+    height: '8%',
     borderWidth: 1,
     borderColor: Colors.PrimaryColor,
     paddingVertical: responsiveHeight(0.5),
