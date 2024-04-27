@@ -1,0 +1,11 @@
+// **************************** Get Movies *************************
+export const GET_MOVIES_REQUEST = 'GET_MOVIES_REQUEST';
+export const GET_MOVIES_RESPONSE_SUCCESS = 'GET_MOVIES_RESPONSE_SUCCESS';
+export const GET_MOVIES_RESPONSE_FAILED = 'GET_MOVIES_RESPONSE_FAILED';
+export const GET_MOVIES_LOADING = 'GET_MOVIES_LOADING';
+
+// **************************** Get Genre Movies *************************
+export const GET_GENRE_MOVIES_REQUEST = 'GET_GENRE_MOVIES_REQUEST';
+export const GET_GENRE_MOVIES_RESPONSE_SUCCESS = 'GET_GENRE_MOVIES_RESPONSE_SUCCESS';
+export const GET_GENRE_MOVIES_RESPONSE_FAILED = 'GET_GENRE_MOVIES_RESPONSE_FAILED';
+export const GET_GENRE_MOVIES_LOADING = 'GET_GENRE_MOVIES_LOADING';

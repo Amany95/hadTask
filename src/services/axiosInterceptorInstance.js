@@ -1,9 +1,9 @@
 import axios from 'axios';
-import {baseUrlApp} from '../constants';
 import {ApiKey} from '../constants/ApiKey';
+import {baseUrlApp} from '../constants/Url';
 
 const axiosInterceptorInstance = axios.create({
-  baseURL: baseUrlApp, 
+  baseURL: baseUrlApp,
 });
 
 // Request interceptor
