@@ -1,8 +1,9 @@
 import React from 'react';
 import {Text} from 'react-native';
+import {GridList} from '../../components/gridList/GridList';
 
 function SeeAll(): JSX.Element {
-  return <Text>See All screen</Text>;
+  return <GridList />;
 }
 
 export {SeeAll};
