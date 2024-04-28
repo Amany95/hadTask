@@ -1,79 +1,99 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# About The App
+This React Native mobile app displays information about movies from various categories using data fetched from different APIs. The app consists of two main pages: the home page and the "See All" page.
+## Features
+- Home Page 
+- "See All" Page
+- Movie Details Page
 
-# Getting Started
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
 
-## Step 1: Start the Metro Server
+## Requirements
+- [Node](https://nodejs.org) 
+- [React Native](http://facebook.github.io/react-native/docs/getting-started.html) for development
+- [Xcode](https://developer.apple.com/xcode/) for iOS development
+- [Android Studio](https://developer.android.com/studio/index.html) for Android development
+- [Android SDK](https://developer.android.com/sdk/) 
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+See [Getting Started](https://facebook.github.io/react-native/docs/getting-started.html) to install requirement tools.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+## Stack
+- [React Native](https://facebook.github.io/react-native/) `0.74.0` for building native apps using react
+- [Redux](https://redux.js.org) `5.0.1` a predictable state container for Javascript apps
+- [Bottom-Tabs](https://github.com/react-navigation/react-navigation) `6.5.20` for Bottom Navigations 
+- [Navigation for React Native](https://reactnavigation.org/) a router based on new React Native Navigation API
 
-```bash
-# using npm
-npm start
+## Libraries
+ - [@react-native-async-storage/async-storage](https://react-native-async-storage.github.io/async-storage/docs/install/) 
+ - [@react-native-masked-view/masked-view"](https://github.com/react-native-masked-view/masked-view) 
+ - [@react-navigation/bottom-tabs"](https://github.com/react-navigation/react-navigation) 
+ - [@react-navigation/native"](https://github.com/react-navigation/react-navigation) 
+ - [@react-navigation/stack"](https://github.com/react-navigation/react-navigation) 
+ - [react-native-gesture-handler](https://github.com/software-mansion/react-native-gesture-handler) 
+ - [react-native-reanimated](https://github.com/software-mansion/react-native-reanimated) 
+ - [react-native-safe-area-context](https://github.com/th3rdwave/react-native-safe-area-context) 
+ - [react-native-screens](https://github.com/software-mansion/react-native-screens) 
+ - [react-redux](https://react-redux.js.org/) 
+ - [redux](https://redux.js.org/) 
+ - [redux-saga](https://redux-saga.js.org/) 
+ - [react-content-loader](https://github.com/danilowoz/react-content-loader) 
+ - [react-native-vector-icons](https://github.com/oblador/react-native-vector-icons) 
+ - [react-native-svg](https://github.com/software-mansion/react-native-svg) 
+ - [react-native-responsive-dimensions](https://github.com/react-native-toolkit/react-native-responsive-dimensions) 
+ - [react-native-linear-gradient](https://github.com/react-native-linear-gradient/react-native-linear-gradient) 
+ - [react-native-fast-image](https://github.com/DylanVann/react-native-fast-image) 
+ - [moment](https://momentjs.com/) 
+ - [axios](https://github.com/axios/axios) 
+ - [@rneui/base](https://reactnativeelements.com/docs) 
+ - [@rneui/themed](https://reactnativeelements.com/docs) 
+ - [@shopify/flash-list](https://github.com/Shopify/flash-list) 
 
-# OR using Yarn
-yarn start
+
+
+
+ 
+## Get Started
+
+
+#### 1. Installation
+
+On the command prompt run the following commands
+
+```sh
+$ git clone https://github.com/Amany95/hadTask.git
+
+$ cd hadTask/
+
+$ npm install
+```
+#### 2. Simulate for iOS
+```sh
+$ cd ios && pod install
 ```
 
-## Step 2: Start your Application
+**Method One**
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+*	Open the project in Xcode from **ios/hadTask.xcodeproj**.
 
-### For Android
+*	Hit the play button.
 
-```bash
-# using npm
-npm run android
 
-# OR using Yarn
-yarn android
+**Method Two**
+
+*	Run the following command in your terminal.
+
+```sh
+$ react-native run-ios
 ```
 
-### For iOS
+#### 3. Simulate for Android
 
-```bash
-# using npm
-npm run ios
+*	Make sure you have an **Android emulator** installed and running.
 
-# OR using Yarn
-yarn ios
+*	Run the following command in your terminal.
+
+```sh
+$ react-native run-android
 ```
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
 
-## Step 3: Modifying your App
-
-Now that you have successfully run the app, let's modify it.
-
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
-
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
-
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
