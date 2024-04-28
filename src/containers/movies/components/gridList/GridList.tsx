@@ -25,11 +25,13 @@ import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment';
 import {getAllMoviesListRequest} from '../../../../stores/movies/actions';
 import {PageNumber} from '../../../../constants/Page';
-import {useNavigation} from '@react-navigation/native';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
 import {LoadingIndicator} from '../../../../components/loadingIndicator/LoadingIndicator';
 
 export const GridList: React.FC<{}> = () => {
   const dispatch = useDispatch();
+  const isFocused = useIsFocused();
+
   const onClick = useNavigation();
 
   const [loading, setLoading] = useState(true);
@@ -61,27 +63,18 @@ export const GridList: React.FC<{}> = () => {
 
   const moviesTypes = useSelector(state => state?.MoviesReducer?.typesList);
 
-  useEffect(() => {
-    const loadStadiums = onClick.addListener('focus', () => {
-      setLoading(true);
 
-      setPage(1);
-    });
-
-    return loadStadiums;
-  });
   // *************************** useEffect **************************
 
   useEffect(() => {
     getAllMoviessList();
-  }, [page]);
+  }, [page,isFocused]);
 
   const getAllMoviessList = () => {
     dispatch(
       getAllMoviesListRequest({
         data: {page: page},
         onSuccess: val => {
-          setLoading(false);
           if (scrollFlag) {
             setList(prevListData => ({
               ...prevListData,
@@ -107,7 +100,7 @@ export const GridList: React.FC<{}> = () => {
     return scrollFlag ? <LoadingIndicator /> : null;
   };
   const onEndReached = () => {
-    if (page < list.total_pages) {
+    if (page < list.total_pages && !scrollFlag) {
       let p = page + 1;
       setPage(p);
       setScrollFlag(true);
@@ -165,7 +158,7 @@ export const GridList: React.FC<{}> = () => {
   };
   return (
     <View style={Styles.container}>
-      {list?.results?.length > 0 && (
+      {loading ?(<LoadingIndicator/>):(
         <FlatList
           numColumns={2}
           data={list?.results}

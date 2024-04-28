@@ -36,13 +36,8 @@ function Home(): JSX.Element {
   const getTypesList = () => {
     dispatch(
       getGenreMoviesListRequest({
-        onSuccess: val => {
-          console.log('val*******************************');
-          console.log(val);
-        },
-        onError: val => {
-          console.log('erro **************************************');
-        },
+        onSuccess: val => {},
+        onError: val => {},
       }),
     );
   };
