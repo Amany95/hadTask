@@ -5,13 +5,11 @@ import {
   getMoviesListRequest,
 } from '../../../../stores/movies/actions';
 import {useDispatch} from 'react-redux';
-import {Image} from '@rneui/base';
 import {RemainingMovies} from '../../components/remainingMovies/RemainingMovies';
-import LinearGradient from 'react-native-linear-gradient';
 import {MainMovie} from '../../components/mainMovie/MainMovie';
 import HorizontalListLoader from '../../../../components/shimmer/HorizontalListLoader';
-import {Colors} from '../../../../styles/Colors';
 import MainMovieLoader from '../../../../components/shimmer/MainMovieLoader';
+import Styles from './Styles';
 
 function Home(): JSX.Element {
   const dispatch = useDispatch();
@@ -49,21 +47,16 @@ function Home(): JSX.Element {
     );
   };
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: Colors.PrimaryColor,
-      }}>
+    <View style={Styles.container}>
       <StatusBar
         translucent
         backgroundColor="transparent"
         barStyle="light-content"
       />
-   
+
       {loadingMovies ? <MainMovieLoader /> : <MainMovie />}
 
       {loadingMovies ? <HorizontalListLoader /> : <RemainingMovies />}
-
     </View>
   );
 }
