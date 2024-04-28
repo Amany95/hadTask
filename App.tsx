@@ -11,13 +11,15 @@ import {NavigationContainer} from '@react-navigation/native';
 import BottomTabs from './src/navigators/BottomTabs';
 import {Provider} from 'react-redux';
 import {store} from './src/stores/app';
+import { StackNavigator } from './src/navigators/StackNavigator';
 
 function App(): React.JSX.Element {
   return (
     <Provider store={store}>
-      <NavigationContainer>
+      <StackNavigator/>
+      {/* <NavigationContainer>
         <BottomTabs />
-      </NavigationContainer>
+      </NavigationContainer> */}
     </Provider>
   );
 }

@@ -1,5 +1,13 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {View, Text, Image, FlatList, Dimensions, ViewStyle} from 'react-native';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
+import {
+  View,
+  Text,
+  Image,
+  FlatList,
+  Dimensions,
+  ViewStyle,
+  TouchableOpacity,
+} from 'react-native';
 import {Icon} from '@rneui/themed';
 import {
   responsiveHeight,
@@ -96,7 +104,7 @@ export const GridList: React.FC<{}> = () => {
     );
   };
   const ListFooterComponent = () => {
-    return <LoadingIndicator />;
+    return scrollFlag ? <LoadingIndicator /> : null;
   };
   const onEndReached = () => {
     if (page < list.total_pages) {
@@ -105,6 +113,21 @@ export const GridList: React.FC<{}> = () => {
       setScrollFlag(true);
     }
   };
+  const handleNavigate = useCallback(
+    (item, index) => {
+      onClick.navigate('MovieDetails', {
+        movie: {
+          popularity: item.popularity,
+          title: item.title,
+          urlToImage: item.poster_path,
+          release_date: item.release_date,
+          overview: item.overview,
+        },
+        index: index,
+      });
+    },
+    [onClick],
+  );
   // *************************** render **********************************
   const renderItem = ({item, index}: {item: any; index: number}) => {
     let arr;
@@ -115,27 +138,29 @@ export const GridList: React.FC<{}> = () => {
         );
         return genre ? genre.name : '';
       });
-
-      console.log('***************************************** grid');
-      console.log(arr);
     }
     return (
-      <View style={Styles.cardContainer as ViewStyle}>
-        <FastImage
-          style={Styles.imgStyle}
-          source={{uri: `${imgUrl}${item.poster_path}`}}
-          resizeMode={FastImage.resizeMode.stretch}
-        />
-        <LinearGradient
-          colors={['#0000', '#000A', '#000']}
-          style={Styles.titleContainer}>
-          <Text style={Styles.text}>{item?.title}</Text>
-          <Text style={Styles.typeText} numberOfLines={2}>
-            {arr?.join(', ')}
-            {/* {moment(item?.release_date).format('HH:MM DD, MMMM')} */}
-          </Text>
-        </LinearGradient>
-      </View>
+      <TouchableOpacity
+        onPress={() => {
+          handleNavigate(item, index);
+        }}>
+        <View style={Styles.cardContainer as ViewStyle}>
+          <FastImage
+            style={Styles.imgStyle}
+            source={{uri: `${imgUrl}${item.poster_path}`}}
+            resizeMode={FastImage.resizeMode.stretch}
+          />
+          <LinearGradient
+            colors={['#0000', '#000A', '#000']}
+            style={Styles.titleContainer}>
+            <Text style={Styles.text}>{item?.title}</Text>
+            <Text style={Styles.typeText} numberOfLines={2}>
+              {arr?.join(', ')}
+              {/* {moment(item?.release_date).format('HH:MM DD, MMMM')} */}
+            </Text>
+          </LinearGradient>
+        </View>
+      </TouchableOpacity>
     );
   };
   return (
@@ -147,7 +172,7 @@ export const GridList: React.FC<{}> = () => {
           renderItem={renderItem}
           keyExtractor={(item: any) => item.id.toString()}
           onEndReached={onEndReached}
-          ListFooterComponent={scrollFlag ? ListFooterComponent() : null}
+          ListFooterComponent={ListFooterComponent()}
         />
       )}
     </View>
