@@ -15,6 +15,7 @@ export default StyleSheet.create({
     flex: 0.32,
     paddingLeft: responsiveWidth(4),
     backgroundColor: Colors.PrimaryColor,
+    paddingTop:responsiveHeight(2)
   },
   cardContainer: {
     width: responsiveWidth(35),
@@ -36,6 +37,6 @@ export default StyleSheet.create({
     fontSize: responsiveFontSize(2.3),
     fontWeight: 'bold',
     letterSpacing: 1.5,
-    marginBottom: responsiveHeight(1),
+    marginBottom: responsiveHeight(1.5),
   },
 });

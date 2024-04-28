@@ -18,27 +18,27 @@ export interface IMoviesListPayloadType {
 export interface IMoviesListRequest {
   page: number;
 }
-
+export interface IMoviesResultsRequest {
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: string[];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+}
 export interface IMoviesListResponse {
   page: number;
   total_results: number;
   total_pages: number;
-  results: {
-    adult: boolean;
-    backdrop_path: string;
-    genre_ids: string[];
-    id: number;
-    original_language: string;
-    original_title: string;
-    overview: string;
-    popularity: number;
-    poster_path: string;
-    release_date: string;
-    title: string;
-    video: boolean;
-    vote_average: number;
-    vote_count: number;
-  }[];
+  results: IMoviesResultsRequest[];
 }
 
 // *********** Genre Movies list ********************

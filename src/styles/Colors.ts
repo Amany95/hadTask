@@ -7,4 +7,5 @@ export const Colors: ColorName = {
   PrimaryColor: 'rgb(17 23 32)',
   InactiveColor: 'rgb(134 137 147)',
   SecondaryColor: 'rgb(198 201 214)',
+  InfoColor:'#a18c50'
 };
