@@ -31,7 +31,7 @@ export const MainMovie: React.FC<{}> = () => {
   const [movie, setMovie] = useState<IMoviesResultsRequest>({});
   const [moviesTypesList, setMoviesTypesList] =
     useState<IGenreMoviesListResponse>({});
-  const [types, setTypes] = useState([]);
+  const [types, setTypes] = useState('');
 
   // *************************** selector **************************
   const {data, loading} = useSelector(
@@ -46,7 +46,7 @@ export const MainMovie: React.FC<{}> = () => {
   }, [data]);
   useEffect(() => {
     {
-      moviesTypes.data.genres.length > 0 &&
+      moviesTypes?.data?.genres?.length > 0 &&
         setMoviesTypesList(moviesTypes.data);
     }
   }, [moviesTypes]);
@@ -113,7 +113,7 @@ export const MainMovie: React.FC<{}> = () => {
 
         <View style={Styles.infoMovieContainer}>
           <Text style={Styles.infoMovieText}>
-            {movie?.release_date.split('-')[0]}
+            {movie?.release_date?.split('-')[0]}
           </Text>
           <Icon
             name="dot-single"

@@ -1,36 +1,41 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StatusBar, Text, View} from 'react-native';
-import {getGenreMoviesListRequest, getMoviesListRequest} from '../../../../stores/movies/actions';
+import {
+  getGenreMoviesListRequest,
+  getMoviesListRequest,
+} from '../../../../stores/movies/actions';
 import {useDispatch} from 'react-redux';
 import {Image} from '@rneui/base';
 import {RemainingMovies} from '../../components/remainingMovies/RemainingMovies';
 import LinearGradient from 'react-native-linear-gradient';
 import {MainMovie} from '../../components/mainMovie/MainMovie';
+import HorizontalListLoader from '../../../../components/shimmer/HorizontalListLoader';
+import {Colors} from '../../../../styles/Colors';
+import MainMovieLoader from '../../../../components/shimmer/MainMovieLoader';
 
 function Home(): JSX.Element {
   const dispatch = useDispatch();
+  const [loadingMovies, setLoadingMovies] = useState(true);
 
   useEffect(() => {
     getMoviessList();
     getTypesList();
   }, []);
   const getMoviessList = () => {
+    setLoadingMovies(true);
     dispatch(
       getMoviesListRequest({
         data: {page: 1},
         onSuccess: val => {
-          console.log('val*******************************');
-          console.log(val);
+          setLoadingMovies(false);
         },
         onError: val => {
-          console.log('erro **************************************');
+          setLoadingMovies(false);
         },
       }),
     );
   };
   const getTypesList = () => {
-    console.log('fun types*******************************');
-
     dispatch(
       getGenreMoviesListRequest({
         onSuccess: val => {
@@ -47,14 +52,18 @@ function Home(): JSX.Element {
     <View
       style={{
         flex: 1,
+        backgroundColor: Colors.PrimaryColor,
       }}>
       <StatusBar
         translucent
         backgroundColor="transparent"
         barStyle="light-content"
       />
-      <MainMovie />
-      <RemainingMovies />
+   
+      {loadingMovies ? <MainMovieLoader /> : <MainMovie />}
+
+      {loadingMovies ? <HorizontalListLoader /> : <RemainingMovies />}
+
     </View>
   );
 }
