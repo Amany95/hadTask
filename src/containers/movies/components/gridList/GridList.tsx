@@ -9,14 +9,25 @@ import {
 
 import Styles from './Styles';
 import FastImage from 'react-native-fast-image';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {imgUrl} from '../../../../constants/Url';
 import {FlashList} from '@shopify/flash-list';
 import {IMoviesListResponse} from '../../../../stores/movies/interfaces/Interfaces';
 import LinearGradient from 'react-native-linear-gradient';
 import moment from 'moment';
+import {getAllMoviesListRequest} from '../../../../stores/movies/actions';
+import {PageNumber} from '../../../../constants/Page';
+import {useNavigation} from '@react-navigation/native';
+import {LoadingIndicator} from '../../../../components/loadingIndicator/LoadingIndicator';
 
 export const GridList: React.FC<{}> = () => {
+  const dispatch = useDispatch();
+  const onClick = useNavigation();
+
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(PageNumber);
+  const [scrollFlag, setScrollFlag] = useState(false);
+
   const [list, setList] = useState<IMoviesListResponse>({
     page: 0,
     total_pages: 0,
@@ -39,21 +50,69 @@ export const GridList: React.FC<{}> = () => {
     },
   });
   // *************************** selector **************************
-  const {data, loading} = useSelector(
-    state => state?.MoviesReducer?.moviesList,
-  );
+
   const moviesTypes = useSelector(state => state?.MoviesReducer?.typesList);
 
-  // *************************** useEffect **************************
   useEffect(() => {
-    setList(data);
-  }, [data]);
+    const loadStadiums = onClick.addListener('focus', () => {
+      setLoading(true);
+
+      setPage(1);
+    });
+
+    return loadStadiums;
+  });
+  // *************************** useEffect **************************
+
+  useEffect(() => {
+    getAllMoviessList();
+  }, [page]);
+
+  const getAllMoviessList = () => {
+    dispatch(
+      getAllMoviesListRequest({
+        data: {page: page},
+        onSuccess: val => {
+          setLoading(false);
+          if (scrollFlag) {
+            setList(prevListData => ({
+              ...prevListData,
+              page: val.page,
+              total_pages: val.total_pages,
+              total_results: val.total_results,
+              results: [...prevListData.results, ...val.results],
+            }));
+          } else {
+            setList(val);
+          }
+          setScrollFlag(false);
+          setLoading(false);
+        },
+        onError: val => {
+          setLoading(false);
+          setList([]);
+        },
+      }),
+    );
+  };
+  const ListFooterComponent = () => {
+    return <LoadingIndicator />;
+  };
+  const onEndReached = () => {
+    if (page < list.total_pages) {
+      let p = page + 1;
+      setPage(p);
+      setScrollFlag(true);
+    }
+  };
   // *************************** render **********************************
   const renderItem = ({item, index}: {item: any; index: number}) => {
     let arr;
     if (moviesTypes?.data?.genres?.length > 0) {
       arr = item?.genre_ids.map(genreId => {
-        const genre = moviesTypes?.data?.genres.find(genre => genre.id === genreId);
+        const genre = moviesTypes?.data?.genres.find(
+          genre => genre.id === genreId,
+        );
         return genre ? genre.name : '';
       });
 
@@ -86,8 +145,9 @@ export const GridList: React.FC<{}> = () => {
           numColumns={2}
           data={list?.results}
           renderItem={renderItem}
-         
           keyExtractor={(item: any) => item.id.toString()}
+          onEndReached={onEndReached}
+          ListFooterComponent={scrollFlag ? ListFooterComponent() : null}
         />
       )}
     </View>

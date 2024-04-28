@@ -26,6 +26,7 @@ import {TextIcon} from '../../../../components/textIcon/TextIcon';
 import {Colors} from '../../../../styles/Colors';
 import {Column} from '../../../../components/column/Column';
 import {Button} from '../../../../components/button/Button';
+import moment from 'moment';
 
 export const MainMovie: React.FC<{}> = () => {
   const [movie, setMovie] = useState<IMoviesResultsRequest>({});
@@ -113,7 +114,8 @@ export const MainMovie: React.FC<{}> = () => {
 
         <View style={Styles.infoMovieContainer}>
           <Text style={Styles.infoMovieText}>
-            {movie?.release_date?.split('-')[0]}
+            {/* {movie?.release_date?.split('-')[0]} */}
+            {moment(movie?.release_date).format('YYYY')}
           </Text>
           <Icon
             name="dot-single"

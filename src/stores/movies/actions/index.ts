@@ -5,6 +5,10 @@ import {
   IMoviesListResponse,
 } from '../interfaces/Interfaces';
 import {
+  GET_ALL_MOVIES_LOADING,
+  GET_ALL_MOVIES_REQUEST,
+  GET_ALL_MOVIES_RESPONSE_FAILED,
+  GET_ALL_MOVIES_RESPONSE_SUCCESS,
   GET_GENRE_MOVIES_LOADING,
   GET_GENRE_MOVIES_REQUEST,
   GET_GENRE_MOVIES_RESPONSE_FAILED,
@@ -28,7 +32,19 @@ export const getMoviesListResponseFailed = () => {
 export const getMoviesListResponseSuccess = (data: IMoviesListResponse) => {
   return {type: GET_MOVIES_RESPONSE_SUCCESS, payload: data};
 };
-
+// **************************** Get all  Movies list *************************
+export const getAllMoviesListRequest = (data: IMoviesListPayloadType) => {
+  return {type: GET_ALL_MOVIES_REQUEST, payload: data};
+};
+export const getAllMoviesListResponseLoading = () => {
+  return {type: GET_ALL_MOVIES_LOADING};
+};
+export const getAllMoviesListResponseFailed = () => {
+  return {type: GET_ALL_MOVIES_RESPONSE_FAILED};
+};
+export const getAllMoviesListResponseSuccess = (data: IMoviesListResponse) => {
+  return {type: GET_ALL_MOVIES_RESPONSE_SUCCESS, payload: data};
+};
 // **************************** Get Genre Movies list *************************
 export const getGenreMoviesListRequest = (
   data: IGenreMoviesListPayloadType,
